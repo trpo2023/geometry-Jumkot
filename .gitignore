@@ -1,4 +1,5 @@
 laba1
-.gitignore.save
-*.o
+*.[oa]
+*.swp
+*.save
 .vscode
