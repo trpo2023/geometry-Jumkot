@@ -167,7 +167,7 @@ void is_end_empty(char *arr, int* num) {
             *num += 1;
         } else {
             show_ERROR(ERROR_UNEXPECT_TOKEN, *num, NULL);
-            exit(0);
+            exit(EXIT_FAILURE);
         }
     }
 }
