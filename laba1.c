@@ -61,10 +61,10 @@ void show_error(int ERROR, int num, char* ch)
     }
 }
 
-void to_lower(char* str, int num)
+void to_lower(char* arr, int num)
 {
     for (int i = 0; i < num; i++) {
-        str[i] = tolower(str[i]);
+        arr[i] = tolower(arr[i]);
     }
 }
 
@@ -182,25 +182,16 @@ void is_end_empty(char* arr, int* num)
     }
 }
 
-struct point center_search(char* arr, int* num)
-{
-    struct point Center;
-
-    Center.x = coordinat_x(arr, num);
-    Center.y = coordinat_y(arr, num);
-
-    return Center;
-}
-
-struct circle circle_search(struct point* Center, char* arr, int* num)
+struct circle data_of_figure(char* arr, int* num)
 {
     struct circle Circle;
 
-    Circle.center.x = Center->x;
-    Circle.center.y = Center->y;
+    Circle.center.x = coordinat_x(arr, num);
+    Circle.center.y = coordinat_y(arr, num);
     Circle.radius = radius_search(arr, num);
 
     return Circle;
+
 }
 
 void show_circle(struct circle* Circle)
@@ -223,8 +214,7 @@ int main()
         if (enter[i] == '(') {
             to_lower(figure, num);
             if (strcmp(figure, "circle") == 0) {
-                struct point Center = center_search(enter, &num);
-                struct circle Circle = circle_search(&Center, enter, &num);
+                struct circle Circle = data_of_figure(enter, &num);
                 is_end_empty(enter, &num);
                 show_circle(&Circle);
                 break;
