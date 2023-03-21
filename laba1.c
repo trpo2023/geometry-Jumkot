@@ -39,15 +39,18 @@ void show_error(int ERROR, int num, char* ch)
         if (*ch == ')') {
             printf("Error at column %d: expected %s'('%s\n", num, BLUE, CLOSE);
             break;
+        } else if (*ch == '(') {
+            printf("Error at column %d: expected %s')'%s\n", num, BLUE, CLOSE);
+            break;
+        } else if (*ch == ' ' && num < 10) {
+            printf("Error at column %d: expected %s'('%s\n", num, BLUE, CLOSE);
+            break;
         } else {
             printf("Error at column %d: expected %s')'%s\n", num, BLUE, CLOSE);
             break;
         }
     case ERROR_NUMBER:
-        printf("Error at column %d: expected %s'<double>'%s\n",
-               num,
-               BLUE,
-               CLOSE);
+        printf("Error at column %d: expected %s'<double>'%s\n", num, BLUE, CLOSE);
         break;
     case ERROR_UNEXPECT_TOKEN:
         printf("Error at column %d: unexpected token\n", num);
@@ -215,9 +218,9 @@ int main()
 
     printf("Enter a geometric figure (or press Enter for exit):\n");
     fgets(enter, SIZE, stdin);
-
+    
     for (int i = 0; i < strlen(enter); i++) {
-        if (enter[i] == '(' || enter[i] == ' ') {
+        if (enter[i] == '(') {
             to_lower(figure, num);
             if (strcmp(figure, "circle") == 0) {
                 struct point Center = center_search(enter, &num);
@@ -229,7 +232,7 @@ int main()
                 show_error(ERROR_NAME, 0, NULL);
                 exit(EXIT_FAILURE);
             }
-        } else if (enter[i] == ')') {
+        } else if (enter[i] == ')' || enter[i] == ' '){
             show_error(ERROR_BRACKET, num, &enter[i]);
             exit(EXIT_FAILURE);
         }
