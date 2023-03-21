@@ -194,12 +194,13 @@ struct circle data_of_figure(char* arr, int* num)
 
 }
 
-void show_circle(struct circle* Circle)
+void show_figure(struct circle* Circle, char* figure)
 {
-    printf("\ncircle(%.2f %.2f, %.2f)\n",
-           Circle->center.x,
-           Circle->center.y,
-           Circle->radius);
+    printf("\n%s(%.2f %.2f, %.2f)\n", 
+        figure,
+        Circle->center.x,
+        Circle->center.y,
+        Circle->radius);
 }
 
 int main()
@@ -216,7 +217,7 @@ int main()
             if (strcmp(figure, "circle") == 0) {
                 struct circle Circle = data_of_figure(enter, &num);
                 is_end_empty(enter, &num);
-                show_circle(&Circle);
+                show_figure(&Circle, figure);
                 break;
             } else {
                 show_error(ERROR_NAME, 0, NULL);
