@@ -68,130 +68,67 @@ void to_lower(char* arr, int num)
     }
 }
 
-double coordinat_x(char* arr, int* num)
+void skip_space(char* arr, int* num, char ch)
 {
-    char exp[20];
-    int i = 0;
-
-    while (!isdigit(arr[*num]) && arr[*num] != '-') {
-        if (arr[*num] == '(' || arr[*num] == ' ') {
-            *num += 1;
-        } else {
-            if (arr[*num] == ')') {
-                show_error(ERROR_BRACKET, *num, &arr[*num]);
-                exit(EXIT_FAILURE);
-            } else {
-                show_error(ERROR_NUMBER, *num, NULL);
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
-
-    while (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.') {
-        exp[i] = arr[*num];
-        i++;
-        *num += 1;
-    }
-    if (arr[*num] != ' ') {
-        show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
-        exit(EXIT_FAILURE);
-    }
-    char* trash;
-    return strtod(exp, &trash);
-}
-
-double coordinat_y(char* arr, int* num)
-{
-    char exp[20];
-    int i = 0;
-
-    while (!isdigit(arr[*num]) && arr[*num] != '-') {
+    while (arr[*num] != ch) {
         if (arr[*num] == ' ') {
             *num += 1;
-        } else {
-            show_error(ERROR_NUMBER, *num, NULL);
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    while (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.') {
-        exp[i] = arr[*num];
-        i++;
-        *num += 1;
-    }
-
-    while (arr[*num] != ',') {
-        if (arr[*num] == ' ') {
-            *num += 1;
-        } else {
+        } else if ((ch == '0') && (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.')){
+            break;
+        } else if (ch == ','){
             show_error(ERROR_EXPECT_COMMA, *num, NULL);
             exit(EXIT_FAILURE);
-        }
-    }
-    char* trash;
-    return strtod(exp, &trash);
-}
-
-double radius_search(char* arr, int* num)
-{
-    char exp[20];
-    int i = 0;
-
-    while (!isdigit(arr[*num])) {
-        if (arr[*num] == ' ' || arr[*num] == ',') {
-            *num += 1;
-        } else {
-            show_error(ERROR_NUMBER, *num, NULL);
+        } else if (ch == ')'){
+            show_error(ERROR_BRACKET, *num, &arr[*num]);
             exit(EXIT_FAILURE);
-        }
-    }
-
-    while (isdigit(arr[*num]) || arr[*num] == '.') {
-        exp[i] = arr[*num];
-        i++;
-        *num += 1;
-    }
-
-    while (arr[*num] != ')') {
-        if (arr[*num] == ' ') {
-            *num += 1;
-        } else {
-            if (arr[*num] == '(') {
-                show_error(ERROR_BRACKET, *num, &arr[*num]);
-                exit(EXIT_FAILURE);
-            } else {
-                show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
-                exit(EXIT_FAILURE);
-            }
-        }
-    }
-    char* trash;
-    return strtod(exp, &trash);
-}
-
-void is_end_empty(char* arr, int* num)
-{
-    *num += 1;
-    while (arr[*num] != '\n' && arr[*num] != EOF) {
-        if (arr[*num] == ' ') {
-            *num += 1;
-        } else {
+        } else if (ch == '\n'){
             show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
             exit(EXIT_FAILURE);
         }
     }
 }
 
+double number_search(char* arr, int* num)
+{
+    char* exp = malloc(20 * sizeof(char));
+    int i = 0;
+    
+    while (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.') {
+        if (arr[*num] == '.' && arr[*(num + 1)] == '.') {
+            show_error(ERROR_NUMBER, *num, NULL);
+            exit(EXIT_FAILURE);
+        }
+        exp[i] = arr[*num];
+        i++;
+        *num += 1;
+    }
+    
+    char* trash;
+    double Number = strtod(exp, &trash);
+    free(exp);
+    return Number;
+}
+
 struct circle data_of_figure(char* arr, int* num)
 {
     struct circle Circle;
 
-    Circle.center.x = coordinat_x(arr, num);
-    Circle.center.y = coordinat_y(arr, num);
-    Circle.radius = radius_search(arr, num);
+    *num += 1;
+    skip_space(arr, num, '0');
+    Circle.center.x = number_search(arr, num);
+
+    skip_space(arr, num, '0');
+    Circle.center.y = number_search(arr, num);
+    skip_space(arr, num, ',');
+    *num += 1;
+
+    skip_space(arr, num, '0');
+    Circle.radius = number_search(arr, num);
+    skip_space(arr, num, ')');
+    *num += 1;
+    skip_space(arr, num, '\n');
 
     return Circle;
-
 }
 
 void show_figure(struct circle* Circle, char* figure)
@@ -216,7 +153,6 @@ int main()
             to_lower(figure, num);
             if (strcmp(figure, "circle") == 0) {
                 struct circle Circle = data_of_figure(enter, &num);
-                is_end_empty(enter, &num);
                 show_figure(&Circle, figure);
                 break;
             } else {
