@@ -73,15 +73,15 @@ void skip_space(char* arr, int* num, char ch)
     while (arr[*num] != ch) {
         if (arr[*num] == ' ') {
             *num += 1;
-        } else if ((ch == '0') && (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.')){
+        } else if ((ch == '0') && (isdigit(arr[*num]) || arr[*num] == '-' || arr[*num] == '.')) {
             break;
-        } else if (ch == ','){
+        } else if (ch == ',') {
             show_error(ERROR_EXPECT_COMMA, *num, NULL);
             exit(EXIT_FAILURE);
-        } else if (ch == ')'){
+        } else if (ch == ')') {
             show_error(ERROR_BRACKET, *num, &arr[*num]);
             exit(EXIT_FAILURE);
-        } else if (ch == '\n'){
+        } else if (ch == '\n') {
             show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
             exit(EXIT_FAILURE);
         }
@@ -159,7 +159,7 @@ int main()
                 show_error(ERROR_NAME, 0, NULL);
                 exit(EXIT_FAILURE);
             }
-        } else if (enter[i] == ')' || enter[i] == ' '){
+        } else if (enter[i] == ')' || enter[i] == ' ') {
             show_error(ERROR_BRACKET, num, &enter[i]);
             exit(EXIT_FAILURE);
         }
