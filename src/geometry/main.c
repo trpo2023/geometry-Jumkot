@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <libgeometry/parser.h>
 #include <libgeometry/error.h>
 #include <libgeometry/lexer.h>
+#include <libgeometry/parser.h>
 
 #define SIZE 100
 
