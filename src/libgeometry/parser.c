@@ -1,10 +1,10 @@
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
-#include <libgeometry/parser.h>
-#include <libgeometry/lexer.h>
 #include <libgeometry/error.h>
+#include <libgeometry/lexer.h>
+#include <libgeometry/parser.h>
 
 void to_lower(char* arr, int num)
 {

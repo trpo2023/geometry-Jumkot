@@ -1,9 +1,9 @@
-#include <stdlib.h>
 #include <ctype.h>
+#include <stdlib.h>
 
-#include <libgeometry/parser.h>
-#include <libgeometry/lexer.h>
 #include <libgeometry/error.h>
+#include <libgeometry/lexer.h>
+#include <libgeometry/parser.h>
 
 double number_search(char* arr, int* num)
 {
