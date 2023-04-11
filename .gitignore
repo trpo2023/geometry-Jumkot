@@ -1,5 +1,5 @@
-laba1
-*.[oa]
+*.
+*.[oad]
 *.swp
-*.save
+*.gitignore.save
 .vscode
