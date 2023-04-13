@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <libgeometry/calculator.h>
 #include <libgeometry/error.h>
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
@@ -18,6 +19,7 @@ int main()
             to_lower(figure, num);
             if (strcmp(figure, "circle") == 0) {
                 struct circle Circle = data_of_figure(enter, &num);
+                specifications_of_figure(&Circle);
                 show_figure(&Circle, figure);
                 break;
             } else {
