@@ -32,6 +32,9 @@ void skip_space(char* arr, int* num, char ch)
         } else if (ch == '\n') {
             show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
             exit(EXIT_FAILURE);
+        } else {
+            show_error(ERROR_UNEXPECT_TOKEN, *num, NULL);
+            exit(EXIT_FAILURE);
         }
     }
 }
