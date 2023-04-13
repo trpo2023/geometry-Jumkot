@@ -18,7 +18,8 @@ double number_search(char* arr, int* num, char ch)
         i++;
         *num += 1;
     }
-    if (arr[*num] != ' ' && arr[*num] != ch && isdigit(arr[*num - 1]) && isdigit(arr[*num + 1])){
+    if (arr[*num] != ' ' && arr[*num] != ch && isdigit(arr[*num - 1])
+        && isdigit(arr[*num + 1])) {
         show_error(ERROR_EXPECT_DOT, *num, NULL);
         exit(EXIT_FAILURE);
     }
