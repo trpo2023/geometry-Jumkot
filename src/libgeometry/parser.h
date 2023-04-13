@@ -9,6 +9,8 @@ struct point {
 struct circle {
     struct point center;
     double radius;
+    double perimeter;
+    double area;
 };
 
 void to_lower(char* arr, int num);
