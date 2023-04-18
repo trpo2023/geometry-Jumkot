@@ -1,5 +1,4 @@
-#include <stdio.h>
-
+#pragma once
 #define BLUE "\e[1;34m"
 #define CLOSE "\e[0m"
 
