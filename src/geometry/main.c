@@ -10,7 +10,8 @@
 int main()
 {
     char ch;
-    while(printf("Enter a geometric figure (or press Q for exit):\n") && ((ch = getc(stdin)) != 'q')) {
+    while (printf("Enter a geometric figure (or press Q for exit):\n")
+           && ((ch = getc(stdin)) != 'q')) {
         char enter[SIZE], figure[SIZE] = {};
         int num = 0;
         fgets(enter, SIZE, stdin);
@@ -35,7 +36,6 @@ int main()
             num++;
         }
     }
-    
 
     return 0;
 }
