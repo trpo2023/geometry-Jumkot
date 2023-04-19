@@ -14,6 +14,28 @@ void to_lower(char* arr, int num)
     }
 }
 
+void pick_up_first_char(char* arr, char ch)
+{
+    char exp[SIZE];
+    for (int j = 0; j < strlen(exp); j++) {
+        exp[j] = '\0';
+    }
+    // for (int j = 0; j < strlen(arr); j++) {
+    //     if (j == 0) {
+    //         exp[0] = ch;
+    //     } else {
+    //         exp[j] = arr[j - 1];
+    //     }
+    // }
+    exp[0] = ch;
+    for (int j = 0; j < strlen(arr); j++) {
+        exp[j + 1] = arr[j];
+    }
+    for (int j = 0; j < strlen(exp); j++) {
+        arr[j] = exp[j];
+    }
+}
+
 void skip_space(char* arr, int* num, char ch)
 {
     while (arr[*num] != ch) {
