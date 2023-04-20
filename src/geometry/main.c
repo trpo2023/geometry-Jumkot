@@ -7,8 +7,6 @@
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
 
-#define NUM_OF_CIRCLES 2
-
 int main()
 {
     char ch;
@@ -41,11 +39,7 @@ int main()
             num++;
         }
     }
-    if((count == NUM_OF_CIRCLES) && (intersect(&circles[0], &circles[1]))) {
-        printf("These circles intersect\n");
-    } else {
-        printf("These circles don't intersect\n");
-    }
+    show_intersect(circles, count);
 
     return 0;
 }

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <libgeometry/calculator.h>
 #include <libgeometry/error.h>
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
@@ -64,4 +65,13 @@ void show_figure(struct circle* Circle, char* figure)
            Circle->radius,
            Circle->perimeter,
            Circle->area);
+}
+
+void show_intersect(struct circle circles[NUM_OF_CIRCLES], int count)
+{
+    if ((count == NUM_OF_CIRCLES) && (intersect(&circles[0], &circles[1]))) {
+        printf("These circles intersect\n");
+    } else {
+        printf("These circles don't intersect\n");
+    }
 }

@@ -24,7 +24,9 @@ struct circle specifications_of_figure(struct circle* Circle)
 
 bool intersect(struct circle* first, struct circle* second)
 {
-    double distance = sqrt(pow(second->center.x - first->center.x, 2) + pow(second->center.y - first->center.y, 2));
+    double distance
+            = sqrt(pow(second->center.x - first->center.x, 2)
+                   + pow(second->center.y - first->center.y, 2));
     if (distance < first->radius + second->radius) {
         return true;
     }
