@@ -7,10 +7,14 @@
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
 
+// #define NUM_OF_CIRCLES 2
+
 int main()
 {
     char ch;
-    while (printf("Enter a geometric figure (or press Q for exit):\n")
+    struct circle circles[2];
+    int count = 0;
+    while ((count < 2) && printf("Enter a geometric figure (or press Q for exit):\n")
            && ((ch = getc(stdin)) != 'q')) {
         char enter[SIZE], figure[SIZE] = {};
         int num = 0;
@@ -20,9 +24,9 @@ int main()
             if (enter[i] == '(') {
                 to_lower(figure, num);
                 if (strcmp(figure, "circle") == 0) {
-                    struct circle Circle = data_of_figure(enter, &num);
-                    specifications_of_figure(&Circle);
-                    show_figure(&Circle, figure);
+                    circles[count] = data_of_figure(enter, &num);
+                    specifications_of_figure(&circles[count]);
+                    show_figure(&circles[count++], figure);
                     break;
                 } else {
                     show_error(ERROR_NAME, 0, NULL);
