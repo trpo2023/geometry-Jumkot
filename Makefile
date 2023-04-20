@@ -22,13 +22,13 @@ DEPS = $(APP_OBJECTS:.o=.d) $(LIB_OBJECTS:.o=.d)
 all: $(APP_PATH)	
 
 $(APP_PATH): $(APP_OBJECTS) $(LIB_PATH)
-	gcc $(CFLAGS) -o $@ $^
+	gcc $(CFLAGS) -o $@ $^ -lm
 
 $(LIB_PATH): $(LIB_OBJECTS)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.c
-	gcc $(CFLAGS) $(DEPSFLAGS) -c -o $@ $<
+	gcc $(CFLAGS) $(DEPSFLAGS) -c -o $@ $< -lm
 
 clean:
 	rm $(APP_PATH) $(OBJ_DIR)/*/*/*.[aod]

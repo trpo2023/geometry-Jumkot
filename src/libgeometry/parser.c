@@ -57,7 +57,7 @@ void skip_space(char* arr, int* num, char ch)
 
 void show_figure(struct circle* Circle, char* figure)
 {
-    printf("\n%s(%.2f %.2f, %.2f)\nPerimeter: %.2f\nArea: %.2f\n",
+    printf("\n%s(%.2f %.2f, %.2f)\nPerimeter: %.2f\nArea: %.2f\n\n",
            figure,
            Circle->center.x,
            Circle->center.y,
