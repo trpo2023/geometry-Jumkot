@@ -8,7 +8,8 @@ enum ERROR {
     ERROR_NUMBER,
     ERROR_UNEXPECT_TOKEN,
     ERROR_EXPECT_COMMA,
-    ERROR_EXPECT_DOT
+    ERROR_EXPECT_DOT,
+    ERROR_INCORRECT_RADIUS
 };
 
 void show_error(int ERROR, int num, char* ch);

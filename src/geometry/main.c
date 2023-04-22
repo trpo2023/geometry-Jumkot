@@ -7,33 +7,39 @@
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
 
-#define SIZE 100
-
 int main()
 {
-    char enter[SIZE], figure[SIZE];
-    int num = 0;
-    printf("Enter a geometric figure (or press Enter for exit):\n");
-    fgets(enter, SIZE, stdin);
-    for (int i = 0; i < strlen(enter); i++) {
-        if (enter[i] == '(') {
-            to_lower(figure, num);
-            if (strcmp(figure, "circle") == 0) {
-                struct circle Circle = data_of_figure(enter, &num);
-                specifications_of_figure(&Circle);
-                show_figure(&Circle, figure);
-                break;
-            } else {
-                show_error(ERROR_NAME, 0, NULL);
+    char ch;
+    struct circle circles[NUM_OF_CIRCLES];
+    int count = 0;
+    while ((count < NUM_OF_CIRCLES)
+           && printf("Enter a geometric figure (or press Q for exit):\n")
+           && ((ch = getc(stdin)) != 'q')) {
+        char enter[SIZE], figure[SIZE] = {};
+        int num = 0;
+        fgets(enter, SIZE, stdin);
+        pick_up_first_char(enter, ch);
+        for (int i = 0; i < strlen(enter); i++) {
+            if (enter[i] == '(') {
+                to_lower(figure, num);
+                if (strcmp(figure, "circle") == 0) {
+                    circles[count] = data_of_figure(enter, &num);
+                    specifications_of_figure(&circles[count]);
+                    show_figure(&circles[count++], figure);
+                    break;
+                } else {
+                    show_error(ERROR_NAME, 0, NULL);
+                    exit(EXIT_FAILURE);
+                }
+            } else if (enter[i] == ')' || enter[i] == ' ') {
+                show_error(ERROR_BRACKET, num, &enter[i]);
                 exit(EXIT_FAILURE);
             }
-        } else if (enter[i] == ')' || enter[i] == ' ') {
-            show_error(ERROR_BRACKET, num, &enter[i]);
-            exit(EXIT_FAILURE);
+            figure[num] = enter[i];
+            num++;
         }
-        figure[num] = enter[i];
-        num++;
     }
+    show_intersect(circles, count);
 
     return 0;
 }

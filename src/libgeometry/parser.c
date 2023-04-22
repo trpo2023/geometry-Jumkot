@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <libgeometry/calculator.h>
 #include <libgeometry/error.h>
 #include <libgeometry/lexer.h>
 #include <libgeometry/parser.h>
@@ -11,6 +12,21 @@ void to_lower(char* arr, int num)
 {
     for (int i = 0; i < num; i++) {
         arr[i] = tolower(arr[i]);
+    }
+}
+
+void pick_up_first_char(char* arr, char ch)
+{
+    char exp[SIZE];
+    for (int j = 0; j < strlen(exp); j++) {
+        exp[j] = '\0';
+    }
+    exp[0] = ch;
+    for (int j = 0; j < strlen(arr); j++) {
+        exp[j + 1] = arr[j];
+    }
+    for (int j = 0; j < strlen(exp); j++) {
+        arr[j] = exp[j];
     }
 }
 
@@ -42,11 +58,20 @@ void skip_space(char* arr, int* num, char ch)
 
 void show_figure(struct circle* Circle, char* figure)
 {
-    printf("\n%s(%.2f %.2f, %.2f)\nPerimeter: %.2f\nArea: %.2f\n",
+    printf("\n%s(%.2f %.2f, %.2f)\nPerimeter: %.2f\nArea: %.2f\n\n",
            figure,
            Circle->center.x,
            Circle->center.y,
            Circle->radius,
            Circle->perimeter,
            Circle->area);
+}
+
+void show_intersect(struct circle circles[NUM_OF_CIRCLES], int count)
+{
+    if ((count == NUM_OF_CIRCLES) && (intersect(&circles[0], &circles[1]))) {
+        printf("These circles intersect\n");
+    } else {
+        printf("These circles don't intersect\n");
+    }
 }
