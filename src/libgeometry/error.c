@@ -44,7 +44,10 @@ void show_error(int ERROR, int num, char* ch)
         printf("Error at column %d: expected %s'.'%s\n", num, BLUE, CLOSE);
         break;
     case ERROR_INCORRECT_RADIUS:
-        printf("Error at column %d: incorrect value for the %sradius%s\n", num, BLUE, CLOSE);
+        printf("Error at column %d: incorrect value for the %sradius%s\n",
+               num,
+               BLUE,
+               CLOSE);
         break;
     }
 }

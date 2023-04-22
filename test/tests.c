@@ -36,7 +36,7 @@ CTEST(parser, skip_space)
 
     char string_2[] = "circle(123.432 3123.        , 10.95)";
     num = 20;
-    skip_space(string_2, &num, ',');;
+    skip_space(string_2, &num, ',');
     expected = 28;
     result = num;
     ASSERT_EQUAL(expected, result);
