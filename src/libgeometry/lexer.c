@@ -44,6 +44,10 @@ struct circle data_of_figure(char* arr, int* num)
 
     skip_space(arr, num, '0');
     Circle.radius = number_search(arr, num, ')');
+    if (Circle.radius <= 0) {
+        show_error(ERROR_INCORRECT_RADIUS, *num, NULL);
+        exit(EXIT_FAILURE);
+    }
     skip_space(arr, num, ')');
     *num += 1;
     skip_space(arr, num, '\n');

@@ -60,4 +60,4 @@ run: all
 
 -include $(DEPS)
 
-.PHONY: all clean
+.PHONY: all clean test
