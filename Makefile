@@ -1,6 +1,6 @@
 APP_NAME = geometry
 LIB_NAME = libgeometry
-TEST_NAME = test
+TEST_NAME = geometry_test
 
 CFLAGS = -Wall -Werror -I src
 TESTFLAGS = -I thirdparty
@@ -47,7 +47,7 @@ $(TEST_PATH): $(TEST_OBJECTS) $(LIB_PATH)
 $(OBJ_DIR)/test/main.o: test/main.c
 	$(CC) $(TESTFLAGS) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $<
 
-$(OBJ_DIR)/test/tests.o: test/test.c
+$(OBJ_DIR)/test/tests.o: test/tests.c
 	$(CC) $(TESTFLAGS) $(CFLAGS) $(DEPSFLAGS) -c -o $@ $<
 
 
